@@ -64,7 +64,7 @@ func (c *Consistent) Add(elt string, numberOfReplicas int) {
 // need c.Lock() before calling
 func (c *Consistent) add(elt string) {
 	numberOfReplicas, err := c.NumberOfReplicas[elt]
-	if err {
+	if !err {
 		return
 	}
 
@@ -86,7 +86,7 @@ func (c *Consistent) Remove(elt string) {
 // need c.Lock() before calling
 func (c *Consistent) remove(elt string) {
 	numberOfReplicas, err := c.NumberOfReplicas[elt]
-	if err {
+	if !err {
 		return
 	}
 
