@@ -43,6 +43,7 @@ func New() *Consistent {
 	//c.NumberOfReplicas = 20
 	c.circle = make(map[uint32]string)
 	c.members = make(map[string]bool)
+	c.NumberOfReplicas = make(map[string]int)
 	return c
 }
 
