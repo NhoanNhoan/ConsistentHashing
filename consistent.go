@@ -252,19 +252,16 @@ func (c *Consistent) hashKeyFnv(key string) uint32 {
 }
 
 func (c *Consistent) updateSortedHashes() {
-	isPower := func (x int, y int) bool {
-                for ; x % y == 0; {
-                        x = x / y
-                }
-
-                return x == 1
+	isPower := func (x int) bool {
+                return (x != 0) && (x & (x - 1) == 0)
         }
+
 
         hashes := c.sortedHashes[:0]
         //reallocate if we're holding on to too much (1/4th)
         // Example: cap of sortedHashes = 128, circle = 64
         // So sortedHashes reallocate to 64
-        if isPower(cap(c.sortedHashes), 2) && isPower(len(c.circle), 2) {
+        if isPower(cap(c.sortedHashes)) && isPower(len(c.circle)) {
                 hashes = nil
         }
 	
